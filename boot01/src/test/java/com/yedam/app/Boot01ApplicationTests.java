@@ -3,6 +3,9 @@ package com.yedam.app;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -41,18 +44,58 @@ class Boot01ApplicationTests {
 		// => 두 개가 같으면 테스트 성공, 다르면 실패
 	}
 	
-	@Test // 등록
-	void insertTest() {
+	//@Test // 등록
+	void insertTest() throws ParseException {
 		EmpVO empVO = new EmpVO();
 		empVO.setLastName("Kang");
-		empVO.setEmail("Kang@daum.net");
+		empVO.setEmail("Kangg@daum.net");
 		empVO.setJobId("SA_REP");
 		
+//		SimpleDateFormat sdf // 날짜 관련 오늘 말고 다른날 추가할때 사용
+//		     = new SimpleDateFormat("yyMMdd"); // 대소문자 구분함
+//		Date date = sdf.parse("240501");
+//		
+//		empVO.setHireDate(date);
+		
 		int result = empMapper.insertEmpInfo(empVO);
+		
+		assertEquals(1, result); // 어썰트 매서드로 확인
+	}
+	
+	//@Test // 수정
+	void updateTest() {
+		// 1) 단건조회
+		EmpVO empVO = new EmpVO();
+		empVO.setEmployeeId(200);
+		
+		EmpVO findVO = empMapper.selectEmpInfo(empVO);
+		// 2) 수정할 데이터
+		findVO.setLastName("Han");
+		findVO.setJobId(null); // 잡id는 월래 낫널이라 에러인데 if 조건문 걸어서 안뜸
+		
+		// 3) 수정
+		int result = empMapper.updateEmpInfo(findVO);
 		
 		assertEquals(1, result);
 	}
 	
+	//@Test // 삭제
+	void deleteTest() {
+		int result= empMapper.deleteEmpInfo(220);
+		assertEquals(1, result);
+	}
+	
+	@Test
+	void selectKeyTest() {
+		EmpVO empVO = new EmpVO();
+		empVO.setLastName("Hong");
+		empVO.setEmail("Hongg@google.com");
+		empVO.setJobId("IT_PROG");
+		// employeeId = null
+		int result = empMapper.insertEmpInfo(empVO);
+		System.out.println("====" + empVO.getEmployeeId());
+		assertEquals(1, result);
+	}
 	
 	
 //    @Autowired // 필드 주입 방식 => 단순 테스트용 별도의 생성자에 셋터를 거치지않고 empMapper에 강제주입함

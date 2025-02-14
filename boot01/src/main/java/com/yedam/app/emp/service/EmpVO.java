@@ -18,5 +18,9 @@ public class EmpVO {
 	private double commissionPct;	// 커미션
 	private int managerId;			// 상사번호
 	private int departmentId;		// 부서번호
+	
+	//public void setEmployeeId(Integer empId) {
+	//	this.empId = empId;
+	//} 마이바티스는 겟터 셋터 기반 동작임
 
 }
