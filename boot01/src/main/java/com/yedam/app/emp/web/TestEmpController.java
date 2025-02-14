@@ -9,7 +9,7 @@ import com.yedam.app.emp.service.EmpVO;
 
 @Controller
 public class TestEmpController {
-	@RequestMapping(path="/", method = RequestMethod.GET)
+	@RequestMapping(path="/test", method = RequestMethod.GET)
 	@ResponseBody
 	public String selectKeyword(EmpVO empVO) {
 		String result = "Result : " + empVO.getEmployeeId();
