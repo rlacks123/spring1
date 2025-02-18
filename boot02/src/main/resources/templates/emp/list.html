@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/"> <!--/* 타임리프 사용할준비 타임리프 공식주소 */-->
+<head>
+<meta charset="UTF-8">
+<meta name="contextPath" th:value="${contextPath}">
+<title>사원관리</title>
+<style> 
+    table, th, td{
+    border: 1px solid Black;
+    }
+
+</style>
+</head>
+<body>
+     <div>
+         <h3>전체 사원 조회</h3>
+         <table>
+            <thead>
+                <tr>
+                   <th>No.</th>
+                   <th>사원번호</th>
+                   <th>이름</th>
+                   <th>입사일자</th>
+                   <th>업무</th>
+                </tr>
+            </thead>
+            <tbody>
+               <th:block th:each="info, sts : ${emps}"> <!--/* 왼쪽이값 오른쪽이배열*/-->
+                   <!--/* 반복하고자 하는 태그 */-->
+                   <!--/* 링크표현식 안에 달러 표현식 () 표현해서 분리 */-->
+                   <tr
+                      th:onclick="|location.href='@{empInfo(empLoyeeId=${info.employeeId})}';|">
+                      <td>[[ ${sts.count} ]]</td> <!--/* 정보 카운트 */-->
+                      <td th:text="${info.employeeId}"></td> <!--/* 내가 넣고싶은 속성 앞에 th쓰기 */-->
+                      <td th:text="${info.lastName}"></td> <!--/* $변수에서 꺼내는 표현식  */-->
+                      <!--/*  <td>[[${info.hireDate}]]</td> */-->
+                      <td>[[${#dates.format(info.hireDate, "yyyy년MM월dd일")}]]</td> <!--/* #내장객체 */-->
+                      <td>[[${info.jobId}]]</td> <!--/* EmpVO에서 필드값 가져옴 */-->
+                   </tr>
+               </th:block>
+            </tbody>
+         </table>
+     </div>
+     <script>
+         const context = document.querySelector('meta[name="contextPath"]')
+                                 .getAttribute('value');
+         
+         document.querySelectorAll('tbody > tr')
+                 .forEach(function(trTag){
+                	 trTag.addEventListener('click', moveInfoPage);
+                 });
+         function moveInfoPage(event){
+        	 let selectedTr = event.currentTarget;
+        	 let eid = selectedTr.children[1].textContent;
+        	 let url = context + '/empInfo?employeeId=' + eid;
+        	 location.href = url;
+         }
+     </script><!--/* 전체조회에서 클릭시 단건조회로 이동함 */-->
+</body>
+</html>

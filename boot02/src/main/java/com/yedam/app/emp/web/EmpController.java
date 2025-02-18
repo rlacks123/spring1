@@ -40,11 +40,16 @@ public class EmpController {
 		// 3) View
 		return "emp/list";
 	}// 컨트롤러 길어야 5~7줄 넘으면 이유 물어봄
+	// prifix , classpath:templates/
+	// suffix , .html
+	
+	// prifix + return + suffix
+	// classpath:/templates/emp/list.html = 경로설정
 	
 	
 	// 단건조회 : GET 컨트롤러 1개 + 전달받을 데이터 => QueryString 쿼리스트링 방식밖에 못씀 GET는
 	//1) URL METHOD
-	@GetMapping("empInfo") // 밑에 empVO는 사용자가 우리한태 준값 // model 사용자한태 줄값
+	@GetMapping("empInfo") // empInfo?employeeId=100 //empVO는 사용자가 우리한태 준값 // model 사용자한태 줄값
 	public String empInfo(EmpVO empVO, Model model) {
          // 2) Service
 	     EmpVO findVO = empService.findEmpInfo(empVO);	
@@ -52,6 +57,11 @@ public class EmpController {
 	     model.addAttribute("emp", findVO); // addAttribute 애드 어트러뷰트 화면 출력때 사용
 	     // 3) View
 	     return "emp/info";
+	 	// prifix , classpath:templates/
+	 	// suffix , .html
+	 	
+	 	// prifix + return + suffix
+	    // classpath:templates/emp/info.html
 		
 	}
 	

@@ -10,7 +10,7 @@ import lombok.Data;
 public class EmpVO {
 	// employee_id => employeeId
 	private Integer employeeId; 	// 사원번호
-	private String flrstName; 		// 이름
+	private String firstName; 		// 이름
 	private String lastName; 		// 성
 	private String email; 			// 이메일
 	private String phoneNumber; 	// 연락처
