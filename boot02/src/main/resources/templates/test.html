@@ -7,7 +7,7 @@
 <body>
       <!--/* 타임리프 기본방식 
                1) th:속성="${}"
-               2) th:src="@{}" or
+               2) th:src="@{}" or 링크 표현식
                   th:href="@{}" or
                   th:action="@{}" */-->
                   
@@ -18,6 +18,7 @@
       <th:block th:each="emp, state : ${empList}"> <!--/* emp EmpVO값, strte는 값 매개변수 */-->
           <p th:if="${state.odd}">[[ ${emp.lastName} ]]</p> <!--/*odd 오드는 홀수 = 홀수면 출력 // 한태그에 반복문 조건문 같이쓰지말기  */-->
       </th:block>
+      
       <th:block th:if="${!empList.isEmpty()}"> <!--/* empList가 비어있지않으면 동작 */-->
           <p th:each="num : ${ #numbers.sequence(1,5)}"> <!--/* 내장객체가 가진 시퀀스 호출 1과5사이의 정수 리턴 */-->
              - [[ ${ num } ]]</p> <!--/* 인라인방식/이중괄호방식 $는 변수 가져오는 #는 객체 */-->

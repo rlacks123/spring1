@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org/"> <!--/* 타임리프 사용할준비 타임리프 공식주소 */-->
+<html xmlns:th="https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.ner.nz/thymeleaf/lo"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="content">
+<!--/* common/layouts/default_layout */-->
 <head>
 <meta charset="UTF-8">
-<meta name="contextPath" th:value="${contextPath}">
 <title>사원관리</title>
 <style> 
     table, th, td{
@@ -31,11 +34,11 @@
                    <tr
                       th:onclick="|location.href='@{empInfo(empLoyeeId=${info.employeeId})}';|">
                       <td>[[ ${sts.count} ]]</td> <!--/* 정보 카운트 */-->
-                      <td th:text="${info.employeeId}"></td> <!--/* 내가 넣고싶은 속성 앞에 th쓰기 */-->
-                      <td th:text="${info.lastName}"></td> <!--/* $변수에서 꺼내는 표현식  */-->
+                      <td th:text="${info.employeeId}"></td> 	<!--/* 내가 넣고싶은 속성 앞에 th쓰기 */-->
+                      <td th:text="${info.lastName}"></td> 		<!--/* $변수에서 꺼내는 표현식  */-->
                       <!--/*  <td>[[${info.hireDate}]]</td> */-->
                       <td>[[${#dates.format(info.hireDate, "yyyy년MM월dd일")}]]</td> <!--/* #내장객체 */-->
-                      <td>[[${info.jobId}]]</td> <!--/* EmpVO에서 필드값 가져옴 */-->
+                      <td>[[${info.jobId}]]</td> 				<!--/* EmpVO에서 필드값 가져옴 */-->
                    </tr>
                </th:block>
             </tbody>

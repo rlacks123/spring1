@@ -61,7 +61,7 @@ public class EmpController {
 	 	// suffix , .html
 	 	
 	 	// prifix + return + suffix
-	    // classpath:templates/emp/info.html
+	    // classpath:/templates/emp/info.html
 		
 	}
 	
@@ -69,6 +69,9 @@ public class EmpController {
 	@GetMapping("empInsert")
 	public String empInsertForm() {
 		return "emp/insert";
+		// prefix + return + suffix
+		// classpath:/templates/emp/insert.html
+		
 	}
 	
 	// 등록 - 처리 : POST => form 태그를 통한 submit // 제이슨 못씀
@@ -90,7 +93,7 @@ public class EmpController {
 	
 	// 수정 - 페이지 : GET 컨트롤러 최소 2개 <=> 단건조회 // 사실상 단건조회 형태로 동작함
 	//1) URL METHOD
-	@GetMapping("empUpdate") // 밑에 empVO는 사용자가 우리한태 준값 // model 사용자한태 줄값
+	@GetMapping("empUpdate") //empUpadte?employeeId=778 // 밑에 empVO는 사용자가 우리한태 준값 // model 사용자한태 줄값
 	public String empUpdate(EmpVO empVO, Model model) {
          // 2) Service
 	     EmpVO findVO = empService.findEmpInfo(empVO);	
@@ -98,6 +101,7 @@ public class EmpController {
 	     model.addAttribute("emp", findVO); // addAttribute 애드 어트러뷰트 화면 출력때 사용
 	     // 3) View
 	     return "emp/update";
+	  // classpath:/templates/emp/update.html
 		
 	}
 	// 수정 - 처리 : POST / AJAX => JSON (@RequestBody)
@@ -110,10 +114,16 @@ public class EmpController {
 	
 	// 단건삭제 - 처리 : GET + 전달받을 데이터 1건 
 	//                 => QueryString(@RequestParam)
-	@GetMapping("empDelete")
+	@GetMapping("empDelete") // empDelete?employeeId=225
 	public String empDelete(Integer employeeId) {
 		empService.removeEmpInfo(employeeId);
 		return "redirect:empList";
 	} // 삭제시 리다이렉트 걸려야함
 
 }
+
+
+
+
+
+

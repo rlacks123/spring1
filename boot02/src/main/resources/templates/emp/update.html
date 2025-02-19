@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.ner.nz/thymeleaf/lo"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="content">
+<head>
+<meta charset="UTF-8">
+<meta name="contextPath" th:value="${contextPath}">
+<title></title>
+</head>
+<body>
+     <form name="updateForm" th:object="${emp}"> <!--/* 객체선택 변수표현식 값앞에 * 사용해서 emp자동부여 */-->
+         <h3>사원 정보 수정</h3>
+         <div>
+             <label for="eid">사원번호</label> <!--/* field 필드 사용시 name value 자동생성 */-->
+             <input type="text" id="eid" th:field="*{employeeId}" readonly>
+         </div>
+         <div>
+             <label for="ename">이름</label>
+             <input type="text" id="ename" th:field="*{lastName}">
+         </div>
+         <div>
+             <label for="email">이메일</label>
+             <input type="email" id="email" th:field="*{email}">
+         </div>
+         <div>
+             <label for="hDate">입사일</label>
+             <input type="date" id="hDate" th:field="*{hireDate}"> <!--/* 필드 속성사용하면 날짜포맷 사용안해도됨 */-->
+         </div>
+         <div>
+             <label for="job">업무</label>
+             <input type="text" id="job" th:field="*{jobId}">
+         </div>
+         <div>
+             <label for="sal">급여</label>
+             <input type="number" id="sal" step="0.01" min="1" th:field="*{salary}">
+         </div>
+         <div>
+             <button type="button">수정</button>
+         </div>
+     </form>
+     <script>
+     
+     document.querySelector('form[name="updateForm"] button')
+             .addEventListener('click', updateAjax);
+     
+     function updateAjax(event){
+        const context = document.querySelector('meta[name="contextPath"]')
+                                .getAttribute('value');     
+     // 1) 보낼 데이터 가져오기
+     let dataObj = getFormData();
+     // 2) AJAX
+     fetch(`${context}/empUpdate`,{
+         method : 'POST',
+         headers : {"Content-type" : "application/json"},                               
+         body : JSON.stringify(dataObj)
+     })
+       .then(res => res.json())
+       .then(data => {
+            // 3) 응답받을 데이터 가져오기 
+            if(data.result){
+            	alert(`${data.target.employeeId}를 수정!`);
+            }else{
+            	alert('수정되지 않았습니다.');
+            }
+          })
+          .catch(err => console.log(err));
+     }
+
+
+     function getFormData() {
+         let formData = new FormData(updateForm);
+
+         let obj = {};
+         formData.forEach((value, name) => {
+              obj[name] = value;
+       })
+       
+         return obj;
+     }
+     </script>
+</body>
+</html>

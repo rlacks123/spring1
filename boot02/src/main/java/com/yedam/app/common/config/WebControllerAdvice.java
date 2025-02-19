@@ -15,5 +15,8 @@ public class WebControllerAdvice {
 		  //${pageContext.request.contextPath}   
 		  // 
 	}
-	
+	/*
+	@ExceptionHandler // 예외처리
+	public ResponseEntity<String> handle(IOException ex)
+	*/
 }

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>boot02</artifactId>
+	<artifactId>boot03</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>boot02</name>
+	<name>boot03</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -42,12 +42,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		<!-- thyemleaf layout-->
-		<dependency>
-             <groupId>nz.net.ultraq.thymeleaf</groupId>
-             <artifactId>thymeleaf-layout-dialect</artifactId>
-        </dependency>
-        
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
