@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<!--/* ~{파일경로 :: fragment이름} */-->
+<!--/* common/configs/style_config */-->
+<th:block th:replace="~{common/configs/style_config :: Bootstrap5Config}"></th:block> <!--/* 리플레이스방식 */-->
+</head>
+<body>
+     <!--/* Header */-->
+     <!--/* common/fragments/default_header */-->
+     <header th:insert="~{common/fragments/default_header :: HeaderFrag}"></header> <!--/* 인서트 방식 하위요소로 집어넣음 */-->
+     <!--/* Content Page : 동적인 페이지 = 기능별로 달라지는 페이지 */-->
+     <main>
+         <div layout:fragment="content"></div>
+     </main>
+</body>
+</html>

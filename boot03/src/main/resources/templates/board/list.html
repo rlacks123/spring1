@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/main_layout}" 
+      layout:fragment="content">
+<!--/* layout:decorate 데코레이트 파일을 찾음 경로로  
+       layout:layout:fragment="content" main_layout 에서 결과값 받은걸 가져옴 */-->  
+<!--/* 각 기능별 페이지 layout 적용 */-->  
+<!--/* common/layouts/main_layout */-->    
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+     <!--/* 컨트롤 전체조회 boards */-->
+     <div class="container text-center">
+         <h3>게시판 목록</h3>
+         <table class="table">
+            <thead>
+                <tr>
+                   <th>번호</th>
+                   <th>제목</th>
+                   <th>작성자</th>
+                   <th>작성일</th> <!--/* yyyy년MM월dd일 */-->
+                </tr>
+            </thead>
+            <tbody>                                   <!--/* Controller 컨트롤 배열을 넣음 ${}  */-->
+              <th:block th:each=" post : ${boards} "> <!--/* each 이치 반복문 = 변수 : 배열 // 향상된 for문이랑 같음*/-->
+                   <!--/* post(BoardVO) => <tr/> 로 바꿔야함 */-->
+                   <!--/* boardInfo?bno=1 여기로 온클릭 /*-->
+                <tr th:id="${post.bno}"
+                    th:onclick="|lacation.href='@{/boardInfo(bno=${post.bno})}'|">       <!--/* text는 [[]] 이중괄호에 ${}변수 가져올거 */-->
+                   <td>[[${post.bno}]]</td>                   
+                   <td>[[${post.title}]]</td>
+                   <td>[[${post.writer}]]</td>
+                   <!-- <td>[[${post.regdate}]]</td> -->
+                   <td>[[${#dates.format(post.regdate, "yyyy년MM월dd일")}]]</td>
+                </tr>    
+              </th:block>
+            </tbody>
+         </table>
+     </div>
+</body>
+</html>

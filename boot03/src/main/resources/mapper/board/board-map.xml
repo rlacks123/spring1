@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.app.board.mapper.BoardMapper"> <!--/* BoardMapper 정보가져옴 */-->
+   <!-- 전체조회 -->
+   <select id="selectAllList"
+           resultType="BoardVO"> <!-- 매서드이름이 id resultType는 리턴타입BoardVO -->
+   SELECT bno
+          , title
+          , contents
+          , writer
+          , regdate
+          , updatedate
+          , image
+   FROM board
+   ORDER BY bno
+   </select>
+   
+   <!-- 단건조회 -->
+   <select id="selectInfo"
+           parameterType="BoardVO"
+           resultType="BoardVO">
+   SELECT bno
+          ,title
+          ,contents
+          ,writer
+          ,regdate
+          ,updatedate
+          ,image
+   FROM board
+   WHERE bno = #{bno} <!-- 마이바티스 는 ? 말고 #{}씀 // #은 VO클래스 내의 필드값-->
+   
+   </select>
+   
+   <!-- 등록 -->
+   <insert id="inserInfo"
+           parameterType="BoardVO">
+           <selectKey keyProperty=""
+                      resultType=""
+                      order="BEFORE">
+               SELECT NVL(MAX(bno), 1000) +1
+               FROM board
+           </selectKey> <!--  인서트 서브코드 시퀀스 생성 -->
+   
+   </insert>
+
+</mapper>

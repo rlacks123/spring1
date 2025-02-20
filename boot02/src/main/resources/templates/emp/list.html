@@ -31,9 +31,8 @@
                <th:block th:each="info, sts : ${emps}"> <!--/* 왼쪽이값 오른쪽이배열*/-->
                    <!--/* 반복하고자 하는 태그 */-->
                    <!--/* 링크표현식 안에 달러 표현식 () 표현해서 분리 */-->
-                   <tr
-                      th:onclick="|location.href='@{empInfo(empLoyeeId=${info.employeeId})}';|">
-                      <td>[[ ${sts.count} ]]</td> <!--/* 정보 카운트 */-->
+                   <tr th:onclick="|location.href='@{empInfo(empLoyeeId=${info.employeeId})}';|">                      
+                      <td>[[ ${sts.count} ]]</td>               <!--/* 정보 카운트 */-->
                       <td th:text="${info.employeeId}"></td> 	<!--/* 내가 넣고싶은 속성 앞에 th쓰기 */-->
                       <td th:text="${info.lastName}"></td> 		<!--/* $변수에서 꺼내는 표현식  */-->
                       <!--/*  <td>[[${info.hireDate}]]</td> */-->
