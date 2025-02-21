@@ -11,7 +11,7 @@ public interface BoardMapper {
 	// 단건조회
 	public BoardVO selectInfo(BoardVO boardVO);
 	
-	// 등록
+	// 등록 // 리턴하는게 무조건 정수라 int
 	public int inserInfo(BoardVO boardVO);
 	
 	// 수정

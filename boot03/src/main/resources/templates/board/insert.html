@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/main_layout}" 
+      layout:fragment="content">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+    <div class="container text-center">
+        <form name="insertform" th:action="@{/boardInsert}" method="post">
+        <h3>게시글 등록</h3>
+        <table class="table table-boardered">
+           <tr>
+               <th>제목</th>
+               <td><input type="text" name="title"></td>
+           </tr>
+           <tr>
+               <th>작성자</th>
+               <td><input type="text" name="writer"></td>
+           </tr>
+           <tr>
+               <th>내용</th>
+               <td><textarea name="contents"></textarea></td>
+           </tr>
+           <tr>
+               <th>첨부파일</th>
+               <td><input type="text" name="image"></td>
+           </tr>
+           <tr>
+               <th>작성일자</th>
+               <td><input type="text" name="regdate"></td>
+           </tr>
+        </table>
+        <button type="submit" class="btn btn-info">등록</button>
+      </form>
+    </div>
+    <script>
+     insertForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let titleInput = document.querySelector('form [name="title"]');
+        if(titleInput.value == '') {
+            alert('제목이 입력되지 않았습니다.');
+            titleInput.focus();
+            return;               
+        }
+
+        let writerInput = document.querySelector('form [name="writer"]');
+        if(writerInput.value == '') {
+            alert('작성자가 입력되지 않았습니다.');
+            writerInput.focus();
+            return;                
+        }
+
+        let regdateInput = document.querySelector('form [name="regdate"]');
+        if(regdateInput.value == '') {
+            alert('작성일자가 입력되지 않았습니다.');
+            regdateInput.focus();
+            return;               
+        }
+
+        alert('정상적으로 등록되었습니다.');
+        insertForm.sublit();       
+     });
+    </script>
+</body>
+</html>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.yedam.app.board.service.BoardService;
 import com.yedam.app.board.service.BoardVO;
@@ -49,6 +50,20 @@ public class BoardController {
 		return "board/info";
 		// classpath:/templates/board/info.html 경로
 		
+	}
+	
+	// 등록 - 페이지
+	@GetMapping("boardInsert")
+	public String boardInsertForm() {
+		return "board/insert";
+	}
+	
+	// 등록 - 처리
+	// 일반적으로 <form/> 활용 => QueryString
+	@PostMapping("boardInsert")
+	public String boardInsertProcess(BoardVO boardVO) {
+		int bno = boardService.createBoard(boardVO);
+		return "redirect:boardInfo?bno=" + bno;
 	}
 	
 	

@@ -34,12 +34,30 @@
    <!-- 등록 -->
    <insert id="inserInfo"
            parameterType="BoardVO">
-           <selectKey keyProperty=""
-                      resultType=""
-                      order="BEFORE">
+           <selectKey keyProperty="bno"
+                      resultType="Integer"
+                      order="BEFORE"> <!--/*VO안에 값중 키는 필드명 리절트타입은 필드타입 오더는 실행조건 */-->
                SELECT NVL(MAX(bno), 1000) +1
                FROM board
            </selectKey> <!--  인서트 서브코드 시퀀스 생성 -->
+           INSERT INTO board
+            ( 
+                 bno
+                ,title
+                ,contents
+                ,writer
+                ,regdate
+                ,image
+           )
+           VALUES
+           (
+               #{bno}
+               , #{title}
+               , #{contents}
+               , #{writer}
+               , #{regdate}
+               , #{image}
+           )
    
    </insert>
 
